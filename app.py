@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import google.generativeai as genai
 import PIL.Image
@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.', template_folder='.')
 CORS(app)
 
 load_dotenv()
@@ -147,6 +147,35 @@ def select_health_tip(food_items):
         return HEALTH_TIPS[2]  # Default hydration tip
 
 @app.route('/', methods=['GET'])
+def index():
+    """Serve the main HTML page"""
+    try:
+        return render_template('index.html')
+    except Exception as e:
+        logger.error(f"Error serving index.html: {str(e)}")
+        return jsonify({
+            "error": "Frontend files not found",
+            "message": "Please ensure index.html, styles.css, and script.js are in the root directory",
+            "api_status": "healthy"
+        }), 404
+
+@app.route('/styles.css')
+def serve_css():
+    """Serve CSS file"""
+    try:
+        return send_from_directory('.', 'styles.css', mimetype='text/css')
+    except Exception:
+        return "/* styles.css not found */", 404
+
+@app.route('/script.js')
+def serve_js():
+    """Serve JavaScript file"""
+    try:
+        return send_from_directory('.', 'script.js', mimetype='application/javascript')
+    except Exception:
+        return "// script.js not found", 404
+
+@app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
     return jsonify({
