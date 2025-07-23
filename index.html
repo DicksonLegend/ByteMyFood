@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's On My Plate?</title>
+    <!-- CSS Link - Make sure this path matches your folder structure -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts for enhanced typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>🍽️ What's On My Plate?</h1>
+            <p>Upload a food image to discover its nutritional information!</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Upload Form Section -->
+            <div class="upload-section">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="imageInput" name="image" accept="image/*" required>
+                        <label for="imageInput" class="file-input-label">
+                            <span class="upload-icon">📷</span>
+                            <span class="upload-text">Choose Food Image</span>
+                            <span class="upload-subtext">or drag and drop here</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Image Preview -->
+                    <div id="imagePreview" class="image-preview" style="display: none;">
+                        <img id="previewImg" alt="Food preview">
+                        <button type="button" id="removeImage" class="remove-btn">✕</button>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" id="analyzeBtn" class="analyze-btn" disabled>
+                        <span class="btn-icon">🔍</span>
+                        <span class="btn-text">Analyze My Plate</span>
+                        <span class="btn-spinner" style="display: none;">
+                            <span class="spinner"></span>
+                            Analyzing...
+                        </span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h2>🎯 Analysis Results</h2>
+                
+                <!-- Food Description Card -->
+                <div class="result-card description-card">
+                    <div class="card-header">
+                        <h3>🔍 Food Description</h3>
+                    </div>
+                    <div class="card-content">
+                        <p id="foodDescription" class="description-text"></p>
+                    </div>
+                </div>
+                
+                <!-- Identified Foods Card -->
+                <div class="result-card foods-card">
+                    <div class="card-header">
+                        <h3>🥘 Identified Foods</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="foodNames" class="food-names"></div>
+                    </div>
+                </div>
+                
+                <!-- Nutrition Information Card -->
+                <div class="result-card nutrition-card">
+                    <div class="card-header">
+                        <h3>📊 Nutrition Information</h3>
+                    </div>
+                    <div class="card-content">
+                        <div id="nutritionInfo" class="nutrition-grid"></div>
+                    </div>
+                </div>
+                
+                <!-- Health Tip Card -->
+                <div class="result-card health-tip-card">
+                    <div class="card-header">
+                        <h3>💡 Health Tip</h3>
+                    </div>
+                    <div class="card-content">
+                        <p id="healthTip" class="health-tip-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <span class="error-icon">⚠️</span>
+                <span class="error-text"></span>
+                <button class="error-close" onclick="hideError()">✕</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>Made by techytrios</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript Link - Make sure this path matches your folder structure -->
+    <script src="script.js"></script>
+</body>
+</html>
