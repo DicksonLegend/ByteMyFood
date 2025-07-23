@@ -1,5 +1,5 @@
 // ===== CONFIGURATION =====
-const API_BASE_URL = 'window.location.origin'; // Change to your backend URL
+const API_BASE_URL = window.location.origin; // Change to your backend URL
 
 // ===== DOM ELEMENTS =====
 const uploadForm = document.getElementById('uploadForm');
